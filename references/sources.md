@@ -1,6 +1,6 @@
-# Sources: the eli5 / show-me family, consolidated
+# Sources: the eli5 / show-me family and the STE skill, consolidated
 
-This skill is a merge, not an invention. Every rule in `SKILL.md` came from one of the variants below, or from a disagreement between two of them that this skill had to settle. Each entry says what the source does, what it does well, and what this skill took or left. Links were live in October 2026.
+The `clarify` skill is a merge, not an invention. Every rule in `SKILL.md` came from one of the variants below, from the ASD-STE100 skill this repository started as, or from a disagreement between two of them that this skill had to settle. Each entry says what the source does, what it does well, and what this skill took or left. Links were live in October 2026.
 
 ## The variants
 
@@ -71,7 +71,14 @@ This skill is a merge, not an invention. Every rule in `SKILL.md` came from one 
 - **What they are.** Diagram generators covering 20+ Mermaid types. One has a render step that catches syntax errors. One auto-triggers on "explain the login flow" and "how does the API authentication work".
 - **Taken.** The diagram-type selection table in `references/forms.md`. The "how does X work" trigger. The habit of checking that a diagram renders.
 
-### 10. Commentary
+### 10. asd-ste100 (this repository's original skill)
+
+- **What it is.** A rewrite skill built on ASD-STE100, the controlled-language standard the aerospace and defense industry built so maintenance instructions cannot be misread. Two modes: Strict for text a program parses, STE-flavored for prose humans read. Ten structural rules, four lexical rules, a simple-tense rule with one exception for modality, a six-habit scan checklist, and a stdlib-only linter. Default output is the rewritten text alone, with a rule table on request.
+- **What it does well.** It names the one thing every simplification skill gets wrong: a hedge is a claim, and shortening a sentence by promoting "may have failed" to "failed" changes what it says. It also separates the rules it can verify (sentence shape) from the rules that need ASD's dictionary (word choice), and says so instead of implying compliance.
+- **Taken.** The whole `rewrite` job. The `agent` reader. The modality rule, promoted to a rule that holds in every job. The "never add a fact" rule. The structural sentence discipline (short, active, one idea, no semicolons) as the house style for every reader. The linter.
+- **Changed.** The two STE modes are no longer chosen by text type. They follow from the reader: `agent` gives Strict, a human reader gives Flavored.
+
+### 11. Commentary
 
 Posts by gridport (DEV), Andrew Ou, bswen, papayota, and Mika Reyes on the official eli5 skill. They share three conclusions. The skill works because it fixes only the reader and the medium. "Five-year-old" should mean zero background rather than low intelligence. A page with big visuals beats a wall of text for a first encounter with a topic. Those three conclusions set this skill's defaults.
 
@@ -87,9 +94,13 @@ Posts by gridport (DEV), Andrew Ou, bswen, papayota, and Mika Reyes on the offic
 | One command or many? | Feynman has eight. show-me and eli5 are separate skills. | One skill. Three option words. |
 | Fixed structure or free? | DreambigOu has a fixed four-part structure. The official eli5 has none. | Fixed parts. Drop any part that adds nothing for this reader. |
 | Who is the `change` reader? | dzhng assumes a technical reader. | Same, unless an audience word says otherwise. |
+| Explain and rewrite: one skill or two? | Every variant does one or the other. The STE skill only rewrites. | One skill. The job is inferred from whether the input is a question or a text. |
+| Which rules does a machine reader get? | The explain family has no machine reader. STE picks a mode by text type. | A fifth reader, `agent`, that switches on the full Strict rule set. |
 
 ## Links
 
+- https://github.com/danyuchn/asd-ste100-skill (the STE skill this repository forked from)
+- https://www.asd-ste100.org/
 - https://github.com/anthropics/claude-plugins-community/blob/main/eli5/skills/eli5/SKILL.md
 - https://github.com/SJ-Wu/skills (eli5, show-me)
 - https://github.com/DreambigOu/ELI5

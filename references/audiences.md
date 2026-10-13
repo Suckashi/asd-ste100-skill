@@ -1,8 +1,8 @@
 # Audiences: from a named reader to a level
 
-The user names a reader. Map it to one of the four levels, then adjust tone and analogy source. The level sets vocabulary, analogy use, and length. The tone note sets how it sounds.
+The user names a reader. Map it to one of the four human readers, then adjust tone and analogy source. The fifth reader, `agent`, is not in this table: it is a program or a model, and it gets the rewrite job's Strict rules instead of a tone. The level sets vocabulary, analogy use, and length. The tone note sets how it sounds.
 
-## The four levels
+## The four human readers
 
 | Level | Reader | Vocabulary | Analogies | Length | Opening move |
 |---|---|---|---|---|---|
