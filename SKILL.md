@@ -1,6 +1,6 @@
 ---
 name: clarify
-description: "Make any text or idea clear for one chosen reader. Explain a topic, code, error, diff, or decision for a kid, a newcomer, a peer, or a boss. Shapes: prose, pseudocode, a tree, a Mermaid diagram, a diff, code, or one HTML page. Or rewrite English that a machine or another agent must parse without a human into ASD-STE100 Simplified Technical English. That covers tool descriptions, error messages, inter-agent instructions, and system prompts. Replaces the eli5, show-me, feynman, walkthrough, and STE100 skills. Triggers: explain, eli5, explain like I'm 5, explain this to my <someone>, dumb it down. Also: show me, draw it, diagram this, walk me through, how does X work, quiz me. Also: disambiguate, STE100, Simplified Technical English, plain-language rewrite, rewrite so an agent cannot misread this. Partial matches count. Not for creative or marketing copy."
+description: "Make any text or idea clear for one chosen reader. Explain a topic, code, error, diff, or decision for a kid, a newcomer, a peer, or a boss. Shapes: prose, pseudocode, a tree, a Mermaid diagram, a diff, code, or one HTML page. Or rewrite English that a machine or another agent must parse without a human into ASD-STE100 Simplified Technical English. That covers tool descriptions, error messages, inter-agent instructions, and system prompts. Replaces the eli5, show-me, feynman, walkthrough, and STE100 skills. Triggers: explain, eli5, explain like I'm 5, explain this to my <someone>, dumb it down. Also: show me, draw it, diagram this, walk me through, how does X work, quiz me. Also: disambiguate, STE100, Simplified Technical English, plain-language rewrite, rewrite so an agent cannot misread this. Partial matches count. A bare /clarify opens a menu. Not for creative or marketing copy."
 version: 1.0.0
 ---
 
@@ -16,7 +16,7 @@ It absorbs two families. The explain family (eli5, show-me, Feynman, walkthrough
 /clarify [reader] [job] [form] [mode] <topic, question, text, file, error, or diff>
 ```
 
-Every option word is optional, in any order. Natural language maps onto the same words.
+A bare `/clarify`, or `/clarify <topic>` with no option word, opens the menu in Step 0. Every option word is optional, in any order, and any of them skips the menu. Natural language maps onto the same words.
 
 | Choice | Words | Default |
 |---|---|---|
@@ -27,6 +27,34 @@ Every option word is optional, in any order. Natural language maps onto the same
 | Output (rewrite only) | `text`, `table` | `text` |
 
 Phrase mapping. "eli5", "like I'm 5", "my kid" set `kid`. "Dumb it down", "I know nothing about this" set `new`. "Explain to my manager", "tell my boss" set `boss`. "For an agent", "so a model cannot misread this", "tool description", "STE100" set `agent`. "Show me", "draw it", "diagram this", "what does the flow look like" set form `auto` with a visual preference. "Walk me through" sets `tree` or `diagram`. "Quiz me" sets `quiz`. "Here is my understanding, what am I missing" sets `gaps`. "Show the diff", "which rules did it break", "before/after" set output `table`.
+
+## Step 0: Menu, when the user has not chosen
+
+Run the menu when the invocation carries no option word and no phrase that sets one. That is a bare `/clarify`, or `/clarify <topic>` with nothing else. Skip it when any word or phrase from the Invocation section is present ("eli5", "show me", "rewrite", "for my boss", `peer`, `diagram`, and so on). The user already chose, so answer at once.
+
+Ask the three questions below in one round. In Claude Code, call the AskUserQuestion tool once with all three questions, the default option first and marked "(Recommended)". Anywhere else, print the text menu and wait for the reply.
+
+| Question | Options | Default |
+|---|---|---|
+| What do you want? | explain it / explain a change (PR, diff, spec) / rewrite it for an agent (STE Strict) / rewrite it for people (STE Flavored) | explain it |
+| For whom? (ignored for an agent rewrite) | someone new to the topic / a peer in the field / a boss or decision maker / a kid | someone new |
+| What shape? (explain only) | auto, the smallest that works / a diagram or tree / pseudocode, code, or diff / one HTML page | auto |
+
+Text menu, for agents without a question tool:
+
+```
+What do you want?  1 explain (default)   2 explain a change   3 rewrite for an agent        4 rewrite for people
+For whom?          a new (default)       b peer               c boss                        d kid
+What shape?        x auto (default)      y diagram or tree    z pseudocode, code, or diff   w one HTML page
+Reply with your picks and the topic, like `1 c y how does login work`. Enter alone takes the defaults.
+```
+
+Rules for the menu:
+
+- If there is no topic yet after the picks, say one line, "Paste the text or ask your question.", and wait.
+- `quiz`, `gaps`, `map`, `analogies`, `break`, and `table` are not on the menu. The user types them as words, or picks "Other" and names one.
+- After the first menu in a session, later bare invocations reuse the same picks. Say so in three words ("Same picks again."). The user says "menu" to choose again.
+- The menu is the one place this skill asks before it answers. Once the user has picked, answer with no further preamble.
 
 ## Step 1: Pick the job
 

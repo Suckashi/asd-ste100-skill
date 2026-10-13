@@ -79,11 +79,22 @@ This repository used to ship two skills, `asd-ste100` and `explain`. Both are no
 
 ## Usage
 
+The simplest way: type `/clarify`, pick from the menu, then paste your text or ask your question.
+
+```
+/clarify
+  What do you want?  explain it (default) · explain a change · rewrite for an agent · rewrite for people
+  For whom?          new (default) · peer · boss · kid
+  What shape?        auto (default) · diagram or tree · pseudocode, code, or diff · one HTML page
+```
+
+Claude Code shows these as clickable choices. Other agents show them as a numbered text menu. Enter alone takes the defaults. Later `/clarify` calls in the same session reuse your picks. Say "menu" to choose again.
+
+The faster way: say what you want, and it answers at once with no menu. Any option word or phrase skips the menu.
+
 ```
 /clarify [reader] [job] [form] [mode] <topic, question, text, file, error, or diff>
 ```
-
-Every option word is optional, in any order. Natural language works the same way.
 
 ```
 /clarify what is a database index              explain, zero-background adult, auto shape
