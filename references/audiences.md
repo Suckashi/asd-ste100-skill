@@ -41,4 +41,4 @@ The user names a reader. Map it to one of the four human readers, then adjust to
 
 ## When the user names no reader
 
-A bare `/clarify` opens the menu in `SKILL.md` Step 0, which asks once. Outside the menu, use `new`. If the conversation makes it obvious that the user is an expert asking a narrow question, use `peer`. Do not ask who the reader is a second time. A wrong guess costs one follow-up. A repeated question costs one round trip every time.
+An unclear request opens the guide in `SKILL.md` Step 0, which asks once about the open choice. When the reader is not in doubt, use `new`. If the conversation makes it obvious that the user is an expert asking a narrow question, use `peer`. Do not ask who the reader is a second time. A wrong guess costs one follow-up. A repeated question costs one round trip every time.

@@ -79,18 +79,24 @@ This repository used to ship two skills, `asd-ste100` and `explain`. Both are no
 
 ## Usage
 
-The simplest way: type `/clarify`, pick from the menu, then paste your text or ask your question.
+Type `/clarify` and say what you want. When the request is clear, it answers at once. When it is not, it asks only about the part it cannot tell, as clickable choices in Claude Code or a numbered text menu elsewhere.
 
 ```
-/clarify
-  What do you want?  explain it (default) · explain a change · rewrite for an agent · rewrite for people
-  For whom?          new (default) · peer · boss · kid
-  What shape?        auto (default) · diagram or tree · pseudocode, code, or diff · one HTML page
+/clarify                                   asks all three, then asks for your text or question
+/clarify <pasted error message>            asks one thing: explain it, or rewrite it?
+/clarify make this simpler for my team     asks one thing: for whom?
+/clarify how does login work               clear: answers at once
 ```
 
-Claude Code shows these as clickable choices. Other agents show them as a numbered text menu. Enter alone takes the defaults. Later `/clarify` calls in the same session reuse your picks. Say "menu" to choose again.
+The three questions it can ask, with defaults first:
 
-The faster way: say what you want, and it answers at once with no menu. Any option word or phrase skips the menu.
+```
+What do you want?  explain it · explain a change · rewrite for an agent · rewrite for people
+For whom?          new · peer · boss · kid
+What shape?        auto · diagram or tree · pseudocode, code, or diff · one HTML page
+```
+
+It asks once, never twice. Picks stick for the session. Say "menu" to choose again. Any option word or trigger phrase settles the choice up front, so the fast path never sees a question.
 
 ```
 /clarify [reader] [job] [form] [mode] <topic, question, text, file, error, or diff>
