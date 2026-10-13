@@ -89,6 +89,12 @@ Not built for: creative writing, marketing copy, or anything where voice and nua
 
 One limit worth stating up front: this fixes the form of a text, not its substance. A paragraph with nothing to say comes out short, clean, and still empty.
 
+## Also in This Repo: `explain`
+
+[`explain/`](explain/) is a second, independent skill. Its one `/explain` command consolidates the `eli5`, `show-me`, `explain-to-my-boss`, Feynman, and walkthrough skills that circulate online. It picks a reader (`kid`, `new`, `peer`, `boss`) and a shape (prose, pseudocode, tree, Mermaid diagram, diff, code, or a single HTML page). It also picks a depth (explain, change, map, analogies, quiz, gaps, break). See [`explain/README.md`](explain/README.md) for usage and [`explain/references/sources.md`](explain/references/sources.md) for what was taken from each variant.
+
+Install it on its own with `npx skills add suckashi/asd-ste100-skill --skill explain`.
+
 ## Sources
 
 - [ASD-STE100 official site](https://www.asd-ste100.org/)
