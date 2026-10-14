@@ -1,6 +1,6 @@
 # Worked examples
 
-Three uses of the skill. The same idea at all four levels, one show-me answer, and one change explanation. The project names are invented for the examples. In real use, every name comes from the user's code.
+Three uses of the skill. The same idea at five readers, one show-me answer, and one change explanation. The project names are invented for the examples. In real use, every name comes from the user's code.
 
 ## 1. One idea, four readers
 
@@ -35,6 +35,10 @@ The question: "what is a database index?"
 > Adding an index on the `email` column makes the user lookup on the login page go from about 800 milliseconds to under 5 milliseconds at current table size. It costs a one-time build of a few minutes, a small amount of disk, and a slight slowdown on sign-ups, which are rare compared with logins.
 >
 > Recommendation: add it. No user-facing risk. The one thing to schedule is the build, which should run off-peak because it reads the whole table once.
+
+### `terse`
+
+> Index = sorted copy of one column plus row pointers. Lookup on `email`: index seek, about log n pages, not a full scan. Cost: every insert, update, delete on `users` also writes the index. Add one for columns you filter on often. Not every column.
 
 ## 2. Show me: "what happens when I click Save?"
 

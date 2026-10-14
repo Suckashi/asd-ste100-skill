@@ -1,8 +1,8 @@
 # Audiences: from a named reader to a level
 
-The user names a reader. Map it to one of the four human readers, then adjust tone and analogy source. The fifth reader, `agent`, is not in this table: it is a program or a model, and it gets the rewrite job's Strict rules instead of a tone. The level sets vocabulary, analogy use, and length. The tone note sets how it sounds.
+The user names a reader. Map it to one of the four human readers, then adjust tone and analogy source. The sixth reader, `agent`, is not in this table. It is a program or a model, and it gets the rewrite job's Strict rules instead of a tone. The level sets vocabulary, analogy use, and length. The tone note sets how it sounds.
 
-## The four human readers
+## The five human readers
 
 | Level | Reader | Vocabulary | Analogies | Length | Opening move |
 |---|---|---|---|---|---|
@@ -10,6 +10,7 @@ The user names a reader. Map it to one of the four human readers, then adjust to
 | `new` | An adult with no background in this topic | Plain words. Define each term at first use. | One, when the idea is not obvious | One short paragraph, or a few | The what |
 | `peer` | Someone who works in this field | Exact terms, no definitions | None unless asked | As long as the question needs | The answer |
 | `boss` | Someone who decides and pays, and does not build | Impact, risk, cost, options, numbers | Only when it shortens the answer | Short. One screen. | The decision or the impact |
+| `terse` | An expert who wants the fewest words. A voice, not a person. | Short words, standard acronyms, articles optional, negations and numbers exact | None | Minimum | The answer, as a fragment if that is shorter |
 
 ## Named readers
 
@@ -31,6 +32,7 @@ The user names a reader. Map it to one of the four human readers, then adjust to
 | "my manager", "my boss", "a director", "a VP", "leadership" | `boss` | Decision first. Impact, risk, cost, timeline. Numbers where they exist. | Business processes, budgets, staffing |
 | "a customer", "a non-technical client" | `boss` | What changes for them, what they need to do, what it costs | Their own business |
 | "a lawyer", "a doctor", "an accountant" | `new` with their field's analogies | Respectful of their expertise, plain about ours | Contracts, diagnosis, ledgers |
+| "tldr" (in any spelling), "short version", "just the answer", "be brief", "less tokens", "caveman" | `terse` | Answer first. No greeting, no recap. Drop articles, keep not/never/no/only/except. | None |
 
 ## Tone rules that apply to every level
 

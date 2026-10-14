@@ -1,10 +1,10 @@
 # Clarify — one skill for "explain this" and "rewrite this so it cannot be misread"
 
-A Claude Code skill with one command, `/clarify`, that replaces two families of skills. The first family is the explainers: `eli5`, `show-me`, `explain-to-my-boss`, Feynman, walkthrough, and their many variants. The second is the [ASD-STE100 Simplified Technical English](https://www.asd-ste100.org/) rewrite skill this repository started as. It turns dense, ambiguous English into text an AI agent can parse without a human to resolve ambiguity.
+A Claude Code skill with one command, `/clarify`, that replaces two families of skills. The first family is the explainers: `eli5`, `show-me`, `explain-to-my-boss`, caveman, walkthrough, and their many variants. The second is the [ASD-STE100 Simplified Technical English](https://www.asd-ste100.org/) rewrite skill this repository started as. It turns dense, ambiguous English into text an AI agent can parse without a human to resolve ambiguity.
 
 All of them do one thing: take something and make it clear to one specific reader. So the skill picks the reader first, then the job, then the shape and the depth. Each choice has a default and a one-word override.
 
-## Two jobs, five readers
+## Two jobs, six readers
 
 | Reader | Who that is | What they get |
 |---|---|---|
@@ -12,13 +12,14 @@ All of them do one thing: take something and make it clear to one specific reade
 | `new` | An adult with no background in this topic (the default for a question) | Plain words, terms defined at first use, one analogy when needed |
 | `peer` | Someone who works in this field | Exact terms, trade-offs, edge cases |
 | `boss` | Someone who decides and pays, and does not build | Decision first, then impact, risk, cost, options |
+| `terse` | Someone who wants the fewest words (the caveman voice) | Answer, reason, next step. Articles dropped, negations and numbers kept. |
 | `agent` | A model, a tool, a pipeline, or a non-native reader, with no human to ask (the default for text a program will parse) | The full ASD-STE100 Strict rule set |
 
 **Explain** is the job when the user wants to understand something: a question, a topic, code, an error, a diff. **Rewrite** is the job when the user hands over text and wants the same content in a clearer form. The skill infers the job from the input. "eli5 this error" is explain. "Rewrite this error so an agent cannot misread it" is rewrite.
 
 ## Explain
 
-The shape is the smallest view that makes the key point clear. The options are prose, pseudocode, a call, component, or file tree, a Mermaid diagram, a diff, or a code block. The last option is one self-contained HTML page with big visuals and few words. The depth is a fixed structure (what, analogy with its limit, how, example, so what, takeaway) with the parts this reader does not need dropped. Other modes: `change` for a PR or spec (Problem, Solution, What changes, What people will notice). And `map`, `analogies`, `quiz`, `gaps`, and `break` from the Feynman family.
+The shape is the smallest view that makes the key point clear. The options are prose, pseudocode, a call, component, or file tree, a Mermaid diagram, a diff, or a code block. The last option is one self-contained HTML page with big visuals and few words. The depth is a fixed structure (what, analogy with its limit, how, example, so what, takeaway) with the parts this reader does not need dropped. The other mode is `change`, for a PR or spec (Problem, Solution, What changes, What people will notice). Five study modes from the Feynman family (`map`, `analogies`, `quiz`, `gaps`, `break`) live in `references/learning-modes.md` and load only when named.
 
 `references/sources.md` lists every variant the explain job absorbed, what each does well, and what was taken. It ends with a table of where the variants disagree and what this skill decided. `examples/explain-examples.md` shows one idea at four readers, one show-me answer, and one change explanation.
 
@@ -53,7 +54,7 @@ It does not compare an original text with a rewrite, verify that requirement str
 
 The dangling-conjunction rule checks list markers at the start of a line with zero to three leading spaces. It supports `-`, `*`, `+`, and numeric markers ending in `.` or `)`. It does not parse list syntax inside blockquotes, lazy continuation, or full nested-list semantics. A stripped line beginning with three backticks or three tildes toggles fence detection. `examples/linter-edge-cases.md` is an intentionally invalid fixture: run `python scripts/ste-lint.py examples/linter-edge-cases.md` to confirm the two expected findings.
 
-The skill's own `SKILL.md` does not lint clean, because its rule tables quote the patterns they forbid. Lint it with `python scripts/ste-lint.py --baseline 16 SKILL.md` and read the findings as examples, not defects.
+The skill's own `SKILL.md` does not lint clean, because its rule tables quote the patterns they forbid. Lint it with `python scripts/ste-lint.py --baseline 15 SKILL.md` and read the findings as examples, not defects.
 
 ## Installation
 
@@ -109,8 +110,8 @@ It asks once, never twice. Picks stick for the session. Say "menu" to choose aga
 /clarify peer diff this refactor               exact terms, shown as a diff
 /clarify change                                Problem / Solution / What changes, for the current diff
 /clarify html how a B-tree splits              one self-contained page, big visuals, few words
-/clarify quiz TCP handshake                    one question at a time
-/clarify gaps                                  then explain the topic yourself, and it finds the hole
+/clarify terse why does this test flake        fewest words: answer, reason, next step
+/clarify quiz TCP handshake                    a study mode, loaded from references/learning-modes.md
 
 /clarify rewrite <paste a tool description>    STE Strict, rewritten text only
 /clarify agent <paste an error message>        same: agent reader implies rewrite in Strict mode
@@ -120,7 +121,7 @@ It asks once, never twice. Picks stick for the session. Say "menu" to choose aga
 
 Or just say it. For explain: "eli5 this error", "show me what happens when I submit the form", "explain this PR to my manager", "walk me through the checkout flow". For rewrite: "disambiguate this tool description", "apply STE100 to this", "rewrite this so an agent can't misread it".
 
-Say "eli5 mode" or "simple mode" to keep a reader for the rest of the session. Say "normal mode" to drop it.
+Say "eli5 mode", "simple mode", or "caveman mode" to keep a reader for the rest of the session. Say "normal mode" to drop it.
 
 ### Optional aliases
 

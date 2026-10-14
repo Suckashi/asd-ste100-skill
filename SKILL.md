@@ -1,14 +1,14 @@
 ---
 name: clarify
-description: "Make any text or idea clear for one chosen reader. Explain a topic, code, error, diff, or decision for a kid, a newcomer, a peer, or a boss. Shapes: prose, pseudocode, a tree, a Mermaid diagram, a diff, code, or one HTML page. Or rewrite English that a machine or another agent must parse without a human into ASD-STE100 Simplified Technical English. That covers tool descriptions, error messages, inter-agent instructions, and system prompts. Replaces the eli5, show-me, feynman, walkthrough, and STE100 skills. Triggers: explain, eli5, explain like I'm 5, explain this to my <someone>, dumb it down. Also: show me, draw it, diagram this, walk me through, how does X work, quiz me. Also: disambiguate, STE100, Simplified Technical English, plain-language rewrite, rewrite so an agent cannot misread this. Partial matches count. Asks only when the request is unclear. Not for creative or marketing copy."
+description: "Make any text or idea clear for one chosen reader. Explain a topic, code, error, diff, or decision for a kid, a newcomer, a peer, a boss, or someone who wants the fewest words. Shapes: prose, pseudocode, a tree, a Mermaid diagram, a diff, code, or one HTML page. Or rewrite English that a machine or another agent must parse without a human into ASD-STE100 Simplified Technical English. That covers tool descriptions, error messages, inter-agent instructions, and system prompts. Replaces the eli5, show-me, caveman, walkthrough, and STE100 skills. Triggers: explain, eli5, explain like I'm 5, explain this to my <someone>, dumb it down. Also: show me, draw it, diagram this, walk me through, how does X work, tldr, be brief, caveman mode. Also: disambiguate, STE100, Simplified Technical English, plain-language rewrite, rewrite so an agent cannot misread this. Partial matches count. Asks only when the request is unclear. Not for creative or marketing copy."
 version: 1.0.0
 ---
 
 # Clarify
 
-Every eli5, show-me, explain-to-my-boss, Feynman, walkthrough, and plain-language rewrite skill does one thing. It takes something and makes it clear to one specific reader. The skills differ on four choices only. Who the reader is. Whether the input is a question to answer or a text to transform. What shape the answer takes. How deep it goes. This skill names those four choices, gives each a default, and lets the user set any of them with one word.
+Every eli5, show-me, explain-to-my-boss, caveman, walkthrough, and plain-language rewrite skill does one thing. It takes something and makes it clear to one specific reader. The skills differ on four choices only. Who the reader is. Whether the input is a question to answer or a text to transform. What shape the answer takes. How deep it goes. This skill names those four choices, gives each a default, and lets the user set any of them with one word.
 
-It absorbs two families. The explain family (eli5, show-me, Feynman, walkthrough, and their variants, listed in `references/sources.md`) became the **explain** job. The ASD-STE100 rewrite skill this repository started as became the **rewrite** job and the `agent` reader.
+It absorbs two families. The explain family (eli5, show-me, caveman, walkthrough, and their variants, listed in `references/sources.md`) became the **explain** job. The ASD-STE100 rewrite skill this repository started as became the **rewrite** job and the `agent` reader.
 
 ## Invocation
 
@@ -20,13 +20,13 @@ When the request is not clear enough to act on, Step 0 asks about the open choic
 
 | Choice | Words | Default |
 |---|---|---|
-| Reader | `kid`, `new`, `peer`, `boss`, `agent` | `new` for a question. `agent` for text a program will parse. `peer` for other text. |
+| Reader | `kid`, `new`, `peer`, `boss`, `terse`, `agent` | `new` for a question. `agent` for text a program will parse. `peer` for other text. |
 | Job | `explain`, `rewrite` | Inferred from the input (Step 1) |
 | Form (explain only) | `prose`, `pseudo`, `tree`, `diagram`, `diff`, `code`, `html` | `auto` |
-| Mode (explain only) | `explain`, `change`, `map`, `analogies`, `quiz`, `gaps`, `break` | `explain` |
+| Mode (explain only) | `explain`, `change` | `explain` |
 | Output (rewrite only) | `text`, `table` | `text` |
 
-Phrase mapping. "eli5", "like I'm 5", "my kid" set `kid`. "Dumb it down", "I know nothing about this" set `new`. "Explain to my manager", "tell my boss" set `boss`. "For an agent", "so a model cannot misread this", "tool description", "STE100" set `agent`. "Show me", "draw it", "diagram this", "what does the flow look like" set form `auto` with a visual preference. "Walk me through" sets `tree` or `diagram`. "Quiz me" sets `quiz`. "Here is my understanding, what am I missing" sets `gaps`. "Show the diff", "which rules did it break", "before/after" set output `table`.
+Phrase mapping. "eli5", "like I'm 5", "my kid" set `kid`. "Dumb it down", "I know nothing about this" set `new`. "Explain to my manager", "tell my boss" set `boss`. "For an agent", "so a model cannot misread this", "tool description", "STE100" set `agent`. "Show me", "draw it", "diagram this", "what does the flow look like" set form `auto` with a visual preference. "Walk me through" sets `tree` or `diagram`. "tldr" (in any spelling), "short version", "just the answer", "be brief", "less tokens", "caveman" set `terse`. "Show the diff", "which rules did it break", "before/after" set output `table`.
 
 ## Step 0: Guide the user when the request is not clear
 
@@ -67,7 +67,7 @@ Reply with your picks and the topic, like `1 c y how does login work`. Enter alo
 Rules for the guide:
 
 - One round, never two. If the reply is still unclear, take the defaults and answer. Say in one line which reading you took.
-- `quiz`, `gaps`, `map`, `analogies`, `break`, and `table` are not on the menu. The user types them as words, or picks "Other" and names one.
+- `terse`, `table`, and the study modes in `references/learning-modes.md` are not on the menu. The user types them as words, or picks "Other" and names one.
 - Picks stick for the session. A later unclear request reuses them. Say so in three words ("Same picks again."). The user says "menu" to choose again.
 - The guide is the one place this skill asks before it answers. Once the user has picked, answer with no further preamble.
 
@@ -89,6 +89,7 @@ Decide who reads the answer before you write a word. The reader sets vocabulary,
 | `new` | No background in this topic, full adult intelligence | Plain words. Define each technical term at first use. | One, when the idea is not obvious | Short |
 | `peer` | Works in this field | Exact terms. Trade-offs and edge cases matter. | None, unless asked | As long as the question needs |
 | `boss` | Decides and pays, does not build | Impact, risk, cost, options. Numbers where they exist. | Only if it shortens the answer | Short. Decision first. |
+| `terse` | An expert who wants the fewest words (the caveman voice) | Short words, standard acronyms, no invented abbreviations. Articles may go. | None | Minimum. Answer, reason, next step. |
 | `agent` | A model, a tool, a translation pipeline, or a non-native reader, with no human to ask | The plainest word, used the same way every time | None | As long as it takes to be unambiguous, and not one word longer |
 
 Rules for picking the reader:
@@ -97,7 +98,8 @@ Rules for picking the reader:
 - **Default to `agent` for text a program will parse.** That means tool and function descriptions, error strings, inter-agent instructions, system prompts, and status reports. It also means any output another model reads with no human in the loop. A technician on a tarmac and a model parsing a tool description are in the same position: neither can ask what you meant.
 - Map named readers to the nearest level, then adjust tone. "My mom", "my partner": `new` with a warm tone and analogies from daily life. "A grad student": `new` or `peer`, depending on whether their field is this field. "A designer", "a PM", "a director": `boss`, framed around what that role decides. The full table is in `references/audiences.md`.
 - **Never talk down.** A simple explanation respects the reader. A cute one does not. No baby talk, no "imagine a magical box", no exclamation marks the content did not earn.
-- **Sticky mode.** The user can say "eli5 mode", "simple mode", or "keep explaining like this". Then keep the reader for the rest of the session. Drop it when they say "normal mode" or "stop eli5". Confirm the change in two words. Otherwise each call is one-shot.
+- **`terse` is a voice, not a person.** Answer first, then the reason, then the next step. No greeting, no preamble, no recap, no closer. Drop articles when the meaning survives. Never drop not, never, no, only, or except. Keep numbers and units exact. Drop hedging phrases about yourself ("I think", "it seems"), but keep the modal inside a claim: "may fail" stays "may fail". It is one word, and it is content. If the terse phrasing is not shorter, use plain phrasing. No performance: no "Caveman:" prefix, no "me think", no decorative emoji. Questions and option lists to the user, and anything that will be saved outside the chat, get plain prose. On the rewrite job `terse` is not a valid reader, because STE forbids dropped articles. Treat it as `peer` there.
+- **Sticky mode.** The user can say "eli5 mode", "simple mode", "terse mode", "caveman mode", or "keep explaining like this". Then keep the reader for the rest of the session. Drop it when they say "normal mode", "stop eli5", or "stop caveman". Confirm the change in two words. Otherwise each call is one-shot.
 
 ## Step 3: Explain
 
@@ -139,7 +141,7 @@ Templates and a worked example for each form are in `references/forms.md`.
 5. **So what.** Why this reader should care. What they can now do, decide, or stop worrying about.
 6. **Takeaway.** One sentence the reader can repeat to someone else.
 
-Typical cuts: `peer` usually gets 1, 3, 4. `boss` usually gets 1, 5, 4, with 5 before 4. `kid` gets 1, 2, 6.
+Typical cuts: `peer` usually gets 1, 3, 4. `boss` usually gets 1, 5, 4, with 5 before 4. `kid` gets 1, 2, 6. `terse` gets 1 and 3, in fragments, plus the next step.
 
 **`change`.** For a diff, a PR, a spec, or a proposed design, read by someone who has not seen the code or the session. Use these headings, in this order:
 
@@ -150,13 +152,7 @@ Typical cuts: `peer` usually gets 1, 3, 4. `boss` usually gets 1, 5, 4, with 5 b
 
 Separate what exists today from what is only proposed. The text must stand on its own without the diff.
 
-**Other modes.**
-
-- `map`: the user does not yet know what to ask. List 5 to 8 things worth understanding about the topic, each as a question, foundations first.
-- `analogies`: give 3 to 5 analogies, say where each one breaks, then name the best one in a single memorable line.
-- `quiz`: ask one question at a time, wait for the answer, raise the difficulty each round. Correct wrong answers in two lines, then ask the next question.
-- `gaps`: the user explains the topic to you. Find the exact point where their explanation goes vague or wrong, name it, ask one question that tests it, then give the corrected version.
-- `break`: for a design or decision. Name the hidden assumption it rests on and the edge case nobody tested.
+**Study modes.** `map`, `analogies`, `quiz`, `gaps`, and `break` live in `references/learning-modes.md`. Read that file only when the user names one of them.
 
 ## Step 4: Rewrite
 
@@ -269,8 +265,9 @@ Follow the table with a one-line note on anything you deliberately did not simpl
 
 ## Additional resources
 
-- `references/sources.md`: every eli5, show-me, feynman, and walkthrough variant the explain job consolidates, plus the STE skill. What each does well, what this skill took, and where they disagreed.
-- `references/audiences.md`: named readers (ages, roles, relationships) mapped to the five readers, with tone notes.
+- `references/learning-modes.md`: the five study modes from the Feynman family (`map`, `analogies`, `quiz`, `gaps`, `break`). Load on request only.
+- `references/sources.md`: every eli5, show-me, caveman, Feynman, and walkthrough variant the explain job consolidates, plus the STE skill, with a star-count table. What each does well, what this skill took, and where they disagreed.
+- `references/audiences.md`: named readers (ages, roles, relationships) mapped to the six readers, with tone notes.
 - `references/forms.md`: a template and a worked example for each visual form, the Mermaid diagram-type table, and the HTML page checklist.
 - `references/writing-rules.md`: the 9 STE rule sections and dictionary structure, with citations to the official standard.
 - `examples/explain-examples.md`: one idea at four readers, one show-me answer, one change explanation.

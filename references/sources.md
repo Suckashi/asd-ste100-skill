@@ -8,7 +8,7 @@ GitHub stars as the repo page showed them on 14 October 2026, rounded where GitH
 
 | Repo | Stars | Installs | Skill(s) used here | Absorbed? |
 |---|---|---|---|---|
-| JuliusBrussee/caveman | 111k | | terse, token-saving voice | No. nathanksou/eli5 is a fork of it. |
+| JuliusBrussee/caveman | 111k | | terse, token-saving voice | Yes, as the `terse` reader. nathanksou/eli5 is a fork of it. |
 | humanlayer/skills | 5.2k | ~12.5k for show-me | show-me | Yes, the whole form axis |
 | danyuchn/asd-ste100-skill | 4.8k | | STE rewrite | Yes, the rewrite job and the agent reader |
 | anthropics/claude-plugins-community | 4.6k | | eli5 (one of ~6 plugins) | Yes, the new default and the html form |
@@ -22,7 +22,7 @@ GitHub stars as the repo page showed them on 14 October 2026, rounded where GitH
 | zabolotiny/mermaid-diagram-claude-code | 7 | | mermaid | Yes, the "how does X work" trigger |
 | nathanksou/eli5 | 6 | | eli5 | Yes, levels, sticky mode, clarity override |
 | SJ-Wu/skills | 0 | | eli5, a copy of show-me | Yes, trigger phrases |
-| haunguyendev/feynman-skill | 0 | | feynman | Yes, map, analogies, quiz, gaps, break |
+| haunguyendev/feynman-skill | 0 | | feynman | Partly. The five modes moved to `references/learning-modes.md`. |
 
 What the table says: the three things many people actually install are a terse voice (caveman), a visual answer (show-me), and an STE rewrite. The Feynman modes come from a repo nobody starred. The reader axis comes from a 1.7k-star repo. Weigh that when deciding what to keep in `SKILL.md`.
 
@@ -78,7 +78,7 @@ What the table says: the three things many people actually install are a terse v
   - `break`: the hidden assumption and the untested edge case.
 
   It reads real source before explaining code. It answers in the user's language.
-- **Taken.** The `map`, `analogies`, `quiz`, `gaps`, and `break` modes. "Say where the analogy breaks." "Read the real thing first." The user-language rule. The one-sentence takeaway.
+- **Taken.** "Say where the analogy breaks." "Read the real thing first." The user-language rule. The one-sentence takeaway. The `map`, `analogies`, `quiz`, `gaps`, and `break` modes were in `SKILL.md` at first. On 14 October 2026 they moved to `references/learning-modes.md`, loaded on request only, because they are study tools and the source repo has no stars.
 - **Left.** `script` and `system`. They are study tools, not explanation.
 
 ### 7. alexanderop/walkthrough
@@ -103,7 +103,14 @@ What the table says: the three things many people actually install are a terse v
 - **Taken.** The whole `rewrite` job. The `agent` reader. The modality rule, promoted to a rule that holds in every job. The "never add a fact" rule. The structural sentence discipline (short, active, one idea, no semicolons) as the house style for every reader. The linter.
 - **Changed.** The two STE modes are no longer chosen by text type. They follow from the reader: `agent` gives Strict, a human reader gives Flavored.
 
-### 11. Commentary
+### 11. JuliusBrussee/caveman
+
+- **What it is.** A terse voice for coding agents, 111k stars. Answer first, then reason, then next step. No greeting, preamble, recap, or closer. Short words. Drop articles when meaning survives. Never drop not, never, no, only, except. Keep numbers, units, code, commands, paths, and errors verbatim. One idea per sentence, with ASD-STE100 named as the floor. Plain prose returns for security warnings, irreversible actions, step order, a confused user, anything saved outside the chat, and questions to the user. Sticky until "stop caveman" or "normal mode". Two louder levels, `ultracave` and `megacave`.
+- **What it does well.** It proves that most people who ask for "simpler" want "shorter", and that short and exact are not in conflict. Its pre-send check is the best one-paragraph editing rule in the family. Delete the opening sentence that announces intent. Delete the closing recap. Confirm every negation and number verbatim.
+- **Taken.** The `terse` reader, added 14 October 2026: answer-reason-next-step order, dropped articles, protected negations, the no-performance rule, and the plain-prose exceptions. The sticky phrases. The pre-send check folded into "Lead with the answer".
+- **Changed.** Caveman removes hedges. This skill drops hedging phrases about the speaker ("I think") but keeps the modal inside a claim ("may fail"), because the modal is content. `terse` is explain-only: on the rewrite job it becomes `peer`, because STE forbids dropped articles.
+
+### 12. Commentary
 
 Posts by gridport (DEV), Andrew Ou, bswen, papayota, and Mika Reyes on the official eli5 skill. They share three conclusions. The skill works because it fixes only the reader and the medium. "Five-year-old" should mean zero background rather than low intelligence. A page with big visuals beats a wall of text for a first encounter with a topic. Those three conclusions set this skill's defaults.
 
@@ -114,7 +121,7 @@ Posts by gridport (DEV), Andrew Ou, bswen, papayota, and Mika Reyes on the offic
 | A literal five-year-old, or an adult with no background? | The official eli5 says both. SJ-Wu defaults to age 5. Feynman says 12. | `new`: zero background, adult. `kid` only when the user asks for it. |
 | Analogies always, sometimes, or never? | `easy` always, `quick` never, Feynman always with limits. | By level. Every analogy says where it breaks. |
 | HTML for every answer, or never? | The official eli5 always. nathanksou never. html-artifacts gates it. | Gated. On request, or when the idea is spatial. |
-| Cut hedges to save tokens? | nathanksou cuts hedging phrases. | No. Cut filler, keep hedges. A hedge is a claim. |
+| Cut hedges to save tokens? | nathanksou and caveman cut hedging phrases. | Cut filler and self-hedges ("I think"). Keep the modal in a claim ("may fail"). A hedge about the world is content. |
 | Sticky voice or one-shot answer? | nathanksou sticky. The rest one-shot. | One-shot. Sticky when the user says "mode". |
 | One command or many? | Feynman has eight. show-me and eli5 are separate skills. | One skill. Three option words. |
 | Fixed structure or free? | DreambigOu has a fixed four-part structure. The official eli5 has none. | Fixed parts. Drop any part that adds nothing for this reader. |
