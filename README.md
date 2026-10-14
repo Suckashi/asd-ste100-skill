@@ -4,6 +4,8 @@ A Claude Code skill with one command, `/clarify`, that replaces two families of 
 
 All of them do one thing: take something and make it clear to one specific reader. So the skill picks the reader first, then the job, then the shape and the depth. Each choice has a default and a one-word override.
 
+The shape of the skill follows a note Andrej Karpathy posted on 2 October 2026 ([x.com/karpathy/status/2105819303471976479](https://x.com/karpathy/status/2105819303471976479)). He wrote that we will spend much more time trying to understand the outputs of language models, and listed four ways to make that easier, in rising order of effort: ask for ASD-STE100 prose (or "80% of the way there"), ask for diagrams, ask for an interactive HTML page, ask for a 3Blue1Brown-style explainer video. The first three are this skill's rewrite job, its `diagram` and `tree` forms, and its `html` form. The fourth is out of scope. The cheat sheet attached to his post is not used here. Reviewers found errors in it, so the rules below come from the standard's own rule categories (see `references/writing-rules.md`).
+
 ## Two jobs, six readers
 
 | Reader | Who that is | What they get |

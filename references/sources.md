@@ -26,6 +26,21 @@ GitHub stars as the repo page showed them on 14 October 2026, rounded where GitH
 
 What the table says: the three things many people actually install are a terse voice (caveman), a visual answer (show-me), and an STE rewrite. The Feynman modes come from a repo nobody starred. The reader axis comes from a 1.7k-star repo. Weigh that when deciding what to keep in `SKILL.md`.
 
+## The note that connects them
+
+Andrej Karpathy, 2 October 2026, https://x.com/karpathy/status/2105819303471976479. The note says we will spend much more time trying to understand the outputs of language models, and lists four ways to make that easier, in rising order of effort:
+
+1. Ask the model to explain in ASD-STE100 Simplified Technical English. Secondary sources and two derived skills report a softer variant, "80% of the way there". The original wording could not be checked from this environment, so treat the exact phrase as reported.
+2. Ask for diagrams.
+3. Ask for an interactive HTML page.
+4. Ask for a 3Blue1Brown-style explainer video, with ElevenLabs narration.
+
+That ladder is the reason the rewrite job and the explain job belong in one skill. Rung 1 is the rewrite job. Rung 2 is the `diagram` and `tree` forms. Rung 3 is the `html` form. Rung 4 is out of scope. "80% of the way" is the Flavored mode.
+
+Two cautions. The image attached to the note is an ASD-STE100 cheat sheet, and reviewers found it inverts one dictionary rule and approves a verb the standard rejects. This skill does not use that sheet. Second, neither this repository nor the upstream danyuchn/asd-ste100-skill cited the note before 14 October 2026, so the link is reconstructed from timing and content, not from the upstream author's own statement.
+
+Skills built directly on the note, all small as of 14 October 2026: prithivrajmu/asd-ste100 (11 stars, 80% mode by default, strict on request, diagram, HTML, video), ohernandezdev/karpathy-output (5 stars, picks the cheapest rung that makes a claim checkable, treats the artifact as a view and not as evidence), samirsawarkar/asd-ste100-skill (0 stars, a prompt compiler with tiers and a Manim video pipeline).
+
 ## The variants
 
 ### 1. `eli5` in anthropics/claude-plugins-community (Thariq Shihipar)
@@ -131,6 +146,10 @@ Posts by gridport (DEV), Andrew Ou, bswen, papayota, and Mika Reyes on the offic
 
 ## Links
 
+- https://x.com/karpathy/status/2105819303471976479 (the note that connects the family)
+- https://github.com/prithivrajmu/asd-ste100
+- https://github.com/ohernandezdev/karpathy-output
+- https://github.com/samirsawarkar/asd-ste100-skill
 - https://github.com/danyuchn/asd-ste100-skill (the STE skill this repository forked from)
 - https://www.asd-ste100.org/
 - https://github.com/anthropics/claude-plugins-community/blob/main/eli5/skills/eli5/SKILL.md
