@@ -143,7 +143,7 @@ One limit worth stating up front: this fixes the form of a text, not its substan
 
 ## Sources
 
-- [`references/sources.md`](references/sources.md): the eli5, show-me, Feynman, walkthrough, and HTML-artifact skills the explain job consolidates, with links.
+- [`references/sources.md`](references/sources.md): the eli5, show-me, Feynman, walkthrough, and HTML-artifact skills the explain job consolidates, with links and a star-count table. The visual forms come from HumanLayer's `show-me`. The reader axis comes from DreambigOu's `ELI5`. The `new` default and the HTML page come from the official `eli5`.
 - [danyuchn/asd-ste100-skill](https://github.com/danyuchn/asd-ste100-skill): the STE skill this repository forked from.
 - [ASD-STE100 official site](https://www.asd-ste100.org/)
 - [ASD-STE100 — About STE](https://www.asd-ste100.org/about_STE.html)

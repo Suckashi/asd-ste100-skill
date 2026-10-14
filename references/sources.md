@@ -1,6 +1,30 @@
 # Sources: the eli5 / show-me family and the STE skill, consolidated
 
-The `clarify` skill is a merge, not an invention. Every rule in `SKILL.md` came from one of the variants below, from the ASD-STE100 skill this repository started as, or from a disagreement between two of them that this skill had to settle. Each entry says what the source does, what it does well, and what this skill took or left. Links were live in October 2026.
+The `clarify` skill is a merge, not an invention. Every rule in `SKILL.md` came from one of three places. One of the variants below. The ASD-STE100 skill this repository started as. Or a disagreement between two of them that this skill had to settle. Each entry says what the source does, what it does well, and what this skill took or left. Links were live in October 2026.
+
+## Popularity, October 2026
+
+GitHub stars as the repo page showed them on 14 October 2026, rounded where GitHub rounds. Install counts are from the skills.sh registry as reported by third-party leaderboards, and only where one was found. Stars for a collection repo count the whole collection, not the one skill.
+
+| Repo | Stars | Installs | Skill(s) used here | Absorbed? |
+|---|---|---|---|---|
+| JuliusBrussee/caveman | 111k | | terse, token-saving voice | No. nathanksou/eli5 is a fork of it. |
+| humanlayer/skills | 5.2k | ~12.5k for show-me | show-me | Yes, the whole form axis |
+| danyuchn/asd-ste100-skill | 4.8k | | STE rewrite | Yes, the rewrite job and the agent reader |
+| anthropics/claude-plugins-community | 4.6k | | eli5 (one of ~6 plugins) | Yes, the new default and the html form |
+| DreambigOu/ELI5 | 1.7k | | eli5 | Yes, the reader axis and the explain structure |
+| dzhng/skills | 1.3k | | eli5 (one of ~30 skills) | Yes, the change mode |
+| WH-2099/mermaid-skill | 291 | | mermaid | Yes, the diagram-type table |
+| careerhackeralex/visualize | 236 | | visualize | No. Overlaps the html form. |
+| dogum/html-artifacts | 151 | | html-artifacts | Yes, the html gate |
+| alexanderop/walkthrough | 144 | | walkthrough | Yes, the node cap and explore-first |
+| mgranberry/mermaid-diagram-skill | 10 | | mermaid | Yes, the render check |
+| zabolotiny/mermaid-diagram-claude-code | 7 | | mermaid | Yes, the "how does X work" trigger |
+| nathanksou/eli5 | 6 | | eli5 | Yes, levels, sticky mode, clarity override |
+| SJ-Wu/skills | 0 | | eli5, a copy of show-me | Yes, trigger phrases |
+| haunguyendev/feynman-skill | 0 | | feynman | Yes, map, analogies, quiz, gaps, break |
+
+What the table says: the three things many people actually install are a terse voice (caveman), a visual answer (show-me), and an STE rewrite. The Feynman modes come from a repo nobody starred. The reader axis comes from a 1.7k-star repo. Weigh that when deciding what to keep in `SKILL.md`.
 
 ## The variants
 
@@ -12,7 +36,7 @@ The `clarify` skill is a merge, not an invention. Every rule in `SKILL.md` came 
 - **Taken.** The `new` default. The `html` form and its "big visuals, few words" rule. The restraint of a short prompt.
 - **Left.** HTML for every answer. Three lines of prose are faster to read than a rendered page when three lines would do.
 
-### 2. `eli5` in SJ-Wu/skills, and DreambigOu/ELI5 (near-identical)
+### 2. DreambigOu/ELI5, and the `eli5` in SJ-Wu/skills (near-identical)
 
 - **What it is.** An audience-first explainer. It has a table for age (5, 10, 15, 20 to 30, 40+) and one for grade level (5th grade to graduate school). It has a table for job role (manager, engineer, designer, director, colleague, product manager) and one for relationship (partner, parents, kids, friend). Default audience is age 5.
 - **Structure.** State the what, give an analogy, add detail to the right depth, end with the so-what. Tone matches the reader: enthusiastic for young children, light for teens, confident for professionals, warm for family.
@@ -28,12 +52,13 @@ The `clarify` skill is a merge, not an invention. Every rule in `SKILL.md` came 
 - **Taken.** The level ladder (as `kid`, `new`, `peer`, plus `boss` from source 2). Sticky mode on "mode" phrasing. The clarity override. "Code artifacts stay normal."
 - **Left.** Cutting hedging phrases. This repository's position, inherited from the STE skill, is that a hedge is a claim about confidence and must survive any rewrite. Also left: fragments and symbol shorthand, which cost a `new` reader more than they save.
 
-### 4. `show-me` in SJ-Wu/skills
+### 4. `show-me` in humanlayer/skills (HumanLayer, Dex Horthy)
 
+- **Where it lives.** `plugins/show-me/skills/show-me/SKILL.md` in humanlayer/skills. Install with `npx skills add humanlayer/skills --skill show-me`. The copy in SJ-Wu/skills reproduces it format for format, down to the example function names. That copy adds trigger phrases. Credit goes to HumanLayer.
 - **What it is.** Answer with a picture instead of prose. Eight forms: pseudocode, call tree, component tree, shallow file tree, Mermaid diagram, diff, full code block, and a single HTML file. The diff comes in four variants: component, file layout, call tree, and state or control flow. The core instruction: skip the preamble, keep prose brief, choose the smallest view that makes the key point clear.
 - **Rules.** Put each visual next to the short text it supports. Include only the calls, files, props, states, or boundaries needed for this question. Use one form, several, or none. All of them is almost never right. Open an HTML file with `open`, `xdg-open`, or `start`.
-- **Triggers.** "Show me", "draw it", "diagram this", "visualize this", "sketch it out", "what does the flow look like", "let me see the architecture". Also when a prose answer runs long, or when the user is choosing between options that differ mainly in shape.
-- **Taken.** The entire form axis, the selection rule, the placement rule, the node-budget rule, the opener commands, and the trigger phrases.
+- **Triggers.** The HumanLayer original is marked `disable-model-invocation: true`, so it runs only when the user types `/show-me`. The SJ-Wu copy adds "show me", "draw it", "diagram this", "visualize this", "sketch it out", "what does the flow look like", and "let me see the architecture". It also adds two situations. A prose answer that runs long. A choice between options that differ mainly in shape.
+- **Taken.** From HumanLayer: the entire form axis, the selection rule, the placement rule, the node-budget rule, and the opener commands. From the SJ-Wu copy: the trigger phrases, because this skill lets the model invoke it.
 
 ### 5. `eli5` in dzhng/skills
 
@@ -102,7 +127,10 @@ Posts by gridport (DEV), Andrew Ou, bswen, papayota, and Mika Reyes on the offic
 - https://github.com/danyuchn/asd-ste100-skill (the STE skill this repository forked from)
 - https://www.asd-ste100.org/
 - https://github.com/anthropics/claude-plugins-community/blob/main/eli5/skills/eli5/SKILL.md
-- https://github.com/SJ-Wu/skills (eli5, show-me)
+- https://github.com/humanlayer/skills (show-me, in plugins/show-me/skills/show-me/SKILL.md)
+- https://github.com/SJ-Wu/skills (eli5, and a copy of show-me)
+- https://github.com/JuliusBrussee/caveman
+- https://github.com/careerhackeralex/visualize
 - https://github.com/DreambigOu/ELI5
 - https://github.com/nathanksou/eli5
 - https://github.com/dzhng/skills/blob/main/skills/engineering/eli5/SKILL.md
