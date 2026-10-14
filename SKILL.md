@@ -26,7 +26,7 @@ When the request is not clear enough to act on, Step 0 asks about the open choic
 | Mode (explain only) | `explain`, `change` | `explain` |
 | Output (rewrite only) | `text`, `table` | `text` |
 
-Phrase mapping. "eli5", "like I'm 5", "my kid" set `kid`. "Dumb it down", "I know nothing about this" set `new`. "Explain to my manager", "tell my boss" set `boss`. "For an agent", "so a model cannot misread this", "tool description", "STE100" set `agent`. "80% STE" sets rewrite with a human reader. "Show me", "draw it", "diagram this", "what does the flow look like" set form `auto` with a visual preference. "Walk me through" sets `tree` or `diagram`. "tldr" (in any spelling), "short version", "just the answer", "be brief", "less tokens", "caveman" set `terse`. "Show the diff", "which rules did it break", "before/after" set output `table`.
+Phrase mapping. "eli5", "like I'm 5", "dumb it down", "I know nothing about this" set `new`. "My kid", "a child", "my daughter", or an age under 12 set `kid`. "Explain to my manager", "tell my boss" set `boss`. "For an agent", "so a model cannot misread this", "tool description", "STE100" set `agent`. "80% STE" sets rewrite with a human reader. "Show me", "draw it", "diagram this", "what does the flow look like" set form `auto` with a visual preference. "Walk me through" sets `tree` or `diagram`. "tldr" (in any spelling), "short version", "just the answer", "be brief", "less tokens", "caveman" set `terse`. "Show the diff", "which rules did it break", "before/after" set output `table`.
 
 ## Step 0: Guide the user when the request is not clear
 
@@ -36,7 +36,7 @@ Before you answer, check whether the input tells you three things. What the user
 |---|---|---|
 | Everything | a bare `/clarify` | all three questions, then "Paste the text or ask your question." |
 | The topic | an option word with nothing to apply it to (`/clarify boss`) | "What should I clarify? Paste the text or ask your question." |
-| The job | pasted text with no verb and no question: an error, a tool description, a paragraph | "Explain it, or rewrite it?" |
+| The job | pasted prose with no verb and no question: a tool description, a paragraph, a prompt | "Explain it, or rewrite it?" |
 | The reader | "explain this to someone", "make this simpler", "for my team" when the team could be engineers or not | "For whom?" |
 | Agent or human | "rewrite this", "clean this up" with no hint whether a program or a person reads the result | "Who reads the result: an agent, or a person?" |
 | The shape | "make it visual", "draw something" without saying what, or a subject big enough that a tree, a diagram, and a page would differ a lot | "What shape?" |
@@ -44,6 +44,7 @@ Before you answer, check whether the input tells you three things. What the user
 Clear enough, so answer at once:
 
 - A question: "how does X work", "what is X", "why does this fail". Explain, `new`, auto.
+- Pasted program output: a stack trace, a log line, an error with a file and line number. Nobody rewrites a stack trace. Explain it.
 - A trigger phrase: "eli5", "show me", "walk me through", "explain to my boss", "rewrite for an agent", "disambiguate", "apply STE".
 - Any option word from the Invocation section.
 - A change-shaped input: "explain this PR", a diff plus "explain".
@@ -85,12 +86,14 @@ Decide who reads the answer before you write a word. The reader sets vocabulary,
 
 | Reader | Assume | Vocabulary | Analogies | Length |
 |---|---|---|---|---|
-| `kid` | No background and a short attention span | Everyday words only. No jargon at all. | One, carried through the whole answer | Very short |
-| `new` | No background in this topic, full adult intelligence | Plain words. Define each technical term at first use. | One, when the idea is not obvious | Short |
+| `kid` | No background and a short attention span | Everyday words only. No jargon at all. | One, carried through the whole answer | 3 to 6 sentences, under 80 words |
+| `new` | No background in this topic, full adult intelligence | Plain words. Define each technical term at first use. | One, when the idea is not obvious | Under 250 words. One screen. |
 | `peer` | Works in this field | Exact terms. Trade-offs and edge cases matter. | None, unless asked | As long as the question needs |
-| `boss` | Decides and pays, does not build | Impact, risk, cost, options. Numbers where they exist. | Only if it shortens the answer | Short. Decision first. |
+| `boss` | Decides and pays, does not build | Impact, risk, cost, options. Numbers where they exist. | Only if it shortens the answer | Under 120 words. The first sentence is the decision or the impact. No feature lists. |
 | `terse` | An expert who wants the fewest words (the caveman voice) | Short words, standard acronyms, no invented abbreviations. Articles may go. | None | Minimum. Answer, reason, next step. |
 | `agent` | A model, a tool, a translation pipeline, or a non-native reader, with no human to ask | The plainest word, used the same way every time | None | As long as it takes to be unambiguous, and not one word longer |
+
+The word budgets are caps, not targets. Go over one only when the question has that many moving parts. Then say in one line that the answer runs long. A cap beats completeness: a `boss` answer that covers every rule has failed, however accurate it is.
 
 Rules for picking the reader:
 
@@ -122,7 +125,7 @@ Pick the smallest view that makes the key point clear. Most answers need one vis
 
 Rules for every visual:
 
-- Put the visual next to the two or three lines of text it supports. Text first, then visual, then the one line that says what to notice.
+- Put the visual next to the two or three lines of text it supports. Text first, then visual, then the one line that says what to notice. That is the whole answer when the form is a tree, a diagram, a diff, or code: no analogy, no six-part structure, no example run. If the user wants the prose too, they ask.
 - Include only the calls, files, props, states, or boundaries that answer this question. Cut the rest, even if it is real.
 - Use the user's real names: real function names, real file paths, real field names. Never placeholder names when the real thing is in front of you.
 - Diagrams hold 5 to 12 nodes. More than that is two diagrams or a tree.
@@ -141,7 +144,9 @@ Templates and a worked example for each form are in `references/forms.md`.
 5. **So what.** Why this reader should care. What they can now do, decide, or stop worrying about.
 6. **Takeaway.** One sentence the reader can repeat to someone else.
 
-Typical cuts: `peer` usually gets 1, 3, 4. `boss` usually gets 1, 5, 4, with 5 before 4. `kid` gets 1, 2, 6. `terse` gets 1 and 3, in fragments, plus the next step.
+The six parts are a checklist, not headings. Do not label them in the output (no "Analogy:", no "Takeaway:", no "Why it matters"). The reader sees prose.
+
+Cuts by reader. `peer` gets 1, 3, 4. `boss` gets 1, 5, 4, with 5 before 4, and nothing else. `kid` gets 1, 2, 6. `terse` gets 1 and 3, in fragments, plus the next step. `new` gets all six, inside the word budget.
 
 **`change`.** For a diff, a PR, a spec, or a proposed design, read by someone who has not seen the code or the session. Use these headings, in this order:
 
@@ -218,7 +223,7 @@ Six mechanical habits cover most of what makes machine-written English hard to p
 - **Define or avoid.** Define each technical term at first use, or do not use it. Never use a label that you invented earlier in this session as if the reader knew it.
 - **Lead with the answer.** No preamble, no "great question", no "let me explain". No announcement of which skill, reader, job, or mode is in use.
 - **One idea per sentence.** Short sentences. Plain verbs. Active voice. No semicolons. The shortest text that makes the idea unambiguous, and not one sentence shorter. Cutting words is not the goal. Removing ambiguity is.
-- **Clarity override.** Security warnings, confirmations of irreversible actions, and ordered safety procedures always get plain, full sentences, whatever the reader. A safety instruction opens with the command or the condition, never mid-sentence.
+- **Clarity override.** Security warnings, confirmations of irreversible actions, and ordered safety procedures always get plain, full sentences, whatever the reader. A safety instruction opens with the command or the condition, never mid-sentence. For an irreversible action, the warning comes before the command that performs it, not after.
 - **Code artifacts stay normal.** Code blocks, commit messages, PR descriptions, and file contents keep their normal form. The reader setting applies to explanation and commentary only.
 - **Language.** Explain answers in the user's language. Rewrite works on English text, because STE is a standard for English. Keep code, identifiers, and quoted errors as they are in both jobs.
 

@@ -7,9 +7,9 @@ The user names a reader. Map it to one of the four human readers, then adjust to
 | Level | Reader | Vocabulary | Analogies | Length | Opening move |
 |---|---|---|---|---|---|
 | `kid` | A child, or anyone who asked for the literal five-year-old version | Everyday words only | One, carried through the whole answer | Three to six short sentences | The analogy |
-| `new` | An adult with no background in this topic | Plain words. Define each term at first use. | One, when the idea is not obvious | One short paragraph, or a few | The what |
+| `new` | An adult with no background in this topic | Plain words. Define each term at first use. | One, when the idea is not obvious | Under 250 words | The what |
 | `peer` | Someone who works in this field | Exact terms, no definitions | None unless asked | As long as the question needs | The answer |
-| `boss` | Someone who decides and pays, and does not build | Impact, risk, cost, options, numbers | Only when it shortens the answer | Short. One screen. | The decision or the impact |
+| `boss` | Someone who decides and pays, and does not build | Impact, risk, cost, options, numbers | Only when it shortens the answer | Under 120 words | The decision or the impact, in the first sentence |
 | `terse` | An expert who wants the fewest words. A voice, not a person. | Short words, standard acronyms, articles optional, negations and numbers exact | None | Minimum | The answer, as a fragment if that is shorter |
 
 ## Named readers
