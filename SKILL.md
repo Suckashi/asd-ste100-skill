@@ -67,7 +67,7 @@ Reply with your picks and the topic, like `1 c y how does login work`. Enter alo
 Rules for the guide:
 
 - One round, never two. If the reply is still unclear, take the defaults and answer. Say in one line which reading you took.
-- `terse`, `table`, and the study modes in `references/learning-modes.md` are not on the menu. The user types them as words, or picks "Other" and names one.
+- `terse` and `table` are not on the menu. The user types them as words, or picks "Other" and names one.
 - Picks stick for the session. A later unclear request reuses them. Say so in three words ("Same picks again."). The user says "menu" to choose again.
 - The guide is the one place this skill asks before it answers. Once the user has picked, answer with no further preamble.
 
@@ -151,8 +151,6 @@ Typical cuts: `peer` usually gets 1, 3, 4. `boss` usually gets 1, 5, 4, with 5 b
 4. **What people will notice.** One short sentence.
 
 Separate what exists today from what is only proposed. The text must stand on its own without the diff.
-
-**Study modes.** `map`, `analogies`, `quiz`, `gaps`, and `break` live in `references/learning-modes.md`. Read that file only when the user names one of them.
 
 ## Step 4: Rewrite
 
@@ -265,8 +263,7 @@ Follow the table with a one-line note on anything you deliberately did not simpl
 
 ## Additional resources
 
-- `references/learning-modes.md`: the five study modes from the Feynman family (`map`, `analogies`, `quiz`, `gaps`, `break`). Load on request only.
-- `references/sources.md`: every eli5, show-me, caveman, Feynman, and walkthrough variant the explain job consolidates, plus the STE skill, with a star-count table. What each does well, what this skill took, and where they disagreed.
+- `references/sources.md`: every eli5, show-me, caveman, and walkthrough variant the explain job consolidates, plus the STE skill, with a star-count table. What each does well, what this skill took, and where they disagreed.
 - `references/audiences.md`: named readers (ages, roles, relationships) mapped to the six readers, with tone notes.
 - `references/forms.md`: a template and a worked example for each visual form, the Mermaid diagram-type table, and the HTML page checklist.
 - `references/writing-rules.md`: the 9 STE rule sections and dictionary structure, with citations to the official standard.

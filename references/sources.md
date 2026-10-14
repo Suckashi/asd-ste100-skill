@@ -22,7 +22,7 @@ GitHub stars as the repo page showed them on 14 October 2026, rounded where GitH
 | zabolotiny/mermaid-diagram-claude-code | 7 | | mermaid | Yes, the "how does X work" trigger |
 | nathanksou/eli5 | 6 | | eli5 | Yes, levels, sticky mode, clarity override |
 | SJ-Wu/skills | 0 | | eli5, a copy of show-me | Yes, trigger phrases |
-| haunguyendev/feynman-skill | 0 | | feynman | Partly. The five modes moved to `references/learning-modes.md`. |
+| haunguyendev/feynman-skill | 0 | | feynman | Two rules only. The five modes were removed. |
 
 What the table says: the three things many people actually install are a terse voice (caveman), a visual answer (show-me), and an STE rewrite. The Feynman modes come from a repo nobody starred. The reader axis comes from a 1.7k-star repo. Weigh that when deciding what to keep in `SKILL.md`.
 
@@ -78,7 +78,7 @@ What the table says: the three things many people actually install are a terse v
   - `break`: the hidden assumption and the untested edge case.
 
   It reads real source before explaining code. It answers in the user's language.
-- **Taken.** "Say where the analogy breaks." "Read the real thing first." The user-language rule. The one-sentence takeaway. The `map`, `analogies`, `quiz`, `gaps`, and `break` modes were in `SKILL.md` at first. On 14 October 2026 they moved to `references/learning-modes.md`, loaded on request only, because they are study tools and the source repo has no stars.
+- **Taken.** "Say where the analogy breaks." "Read the real thing first." The user-language rule. The one-sentence takeaway. The `map`, `analogies`, `quiz`, `gaps`, and `break` modes were in `SKILL.md` at first. On 14 October 2026 they were removed, because they are study tools, not explanations, and the source repo has no stars.
 - **Left.** `script` and `system`. They are study tools, not explanation.
 
 ### 7. alexanderop/walkthrough

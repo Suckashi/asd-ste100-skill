@@ -19,7 +19,7 @@ All of them do one thing: take something and make it clear to one specific reade
 
 ## Explain
 
-The shape is the smallest view that makes the key point clear. The options are prose, pseudocode, a call, component, or file tree, a Mermaid diagram, a diff, or a code block. The last option is one self-contained HTML page with big visuals and few words. The depth is a fixed structure (what, analogy with its limit, how, example, so what, takeaway) with the parts this reader does not need dropped. The other mode is `change`, for a PR or spec (Problem, Solution, What changes, What people will notice). Five study modes from the Feynman family (`map`, `analogies`, `quiz`, `gaps`, `break`) live in `references/learning-modes.md` and load only when named.
+The shape is the smallest view that makes the key point clear. The options are prose, pseudocode, a call, component, or file tree, a Mermaid diagram, a diff, or a code block. The last option is one self-contained HTML page with big visuals and few words. The depth is a fixed structure (what, analogy with its limit, how, example, so what, takeaway) with the parts this reader does not need dropped. The other mode is `change`, for a PR or spec (Problem, Solution, What changes, What people will notice).
 
 `references/sources.md` lists every variant the explain job absorbed, what each does well, and what was taken. It ends with a table of where the variants disagree and what this skill decided. `examples/explain-examples.md` shows one idea at four readers, one show-me answer, and one change explanation.
 
@@ -111,7 +111,6 @@ It asks once, never twice. Picks stick for the session. Say "menu" to choose aga
 /clarify change                                Problem / Solution / What changes, for the current diff
 /clarify html how a B-tree splits              one self-contained page, big visuals, few words
 /clarify terse why does this test flake        fewest words: answer, reason, next step
-/clarify quiz TCP handshake                    a study mode, loaded from references/learning-modes.md
 
 /clarify rewrite <paste a tool description>    STE Strict, rewritten text only
 /clarify agent <paste an error message>        same: agent reader implies rewrite in Strict mode
@@ -144,7 +143,7 @@ One limit worth stating up front: this fixes the form of a text, not its substan
 
 ## Sources
 
-- [`references/sources.md`](references/sources.md): the eli5, show-me, Feynman, walkthrough, and HTML-artifact skills the explain job consolidates, with links and a star-count table. The visual forms come from HumanLayer's `show-me`. The reader axis comes from DreambigOu's `ELI5`. The `new` default and the HTML page come from the official `eli5`.
+- [`references/sources.md`](references/sources.md): the eli5, show-me, caveman, walkthrough, and HTML-artifact skills the explain job consolidates, with links and a star-count table. The visual forms come from HumanLayer's `show-me`. The reader axis comes from DreambigOu's `ELI5`. The `new` default and the HTML page come from the official `eli5`.
 - [danyuchn/asd-ste100-skill](https://github.com/danyuchn/asd-ste100-skill): the STE skill this repository forked from.
 - [ASD-STE100 official site](https://www.asd-ste100.org/)
 - [ASD-STE100 — About STE](https://www.asd-ste100.org/about_STE.html)
