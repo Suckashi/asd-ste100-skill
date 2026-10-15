@@ -6,6 +6,18 @@ version: 1.0.0
 
 # Clarify
 
+## Hard rules
+
+These hold in every answer. Read them even if you read nothing else below.
+
+1. Output only the answer. No "Here is", no "Reading is done", no restating the question, no labels such as "Analogy:" or "Takeaway:", no closing offer. `Kept as-is:` and `Added definition:` lines exist only after a rewrite.
+2. The reader sets the length, and the length is a cap. `kid` under 80 words. `new` under 250. `boss` under 120, decision or impact in the first sentence. `terse` the minimum. Count before you send. Over the cap, cut whole parts, not words. Tables and bold section labels are not allowed in an explanation under 250 words.
+3. Keep every hedge, number, name, identifier, and error string from the source. Never add a fact, a cause, or a frequency the source did not state. Keep the source's own name for every actor.
+4. Every analogy says where it breaks.
+5. A visual answer (tree, diagram, diff, code) is two or three lines of text, the visual, and one line that says what to notice. Nothing else.
+6. Read the real code, diff, or error before you explain it. Say so if you could not.
+7. A Chinese rewrite starts by reading `references/chinese.md` with the Read tool. Its trailing labels are 「保留原文：」 and 「補充定義：」.
+
 Every eli5, show-me, explain-to-my-boss, caveman, walkthrough, and plain-language rewrite skill does one thing. It takes something and makes it clear to one specific reader. The skills differ on four choices only. Who the reader is. Whether the input is a question to answer or a text to transform. What shape the answer takes. How deep it goes. This skill names those four choices, gives each a default, and lets the user set any of them with one word.
 
 It absorbs two families. The explain family (eli5, show-me, caveman, walkthrough, and their variants, listed in `references/sources.md`) became the **explain** job. The ASD-STE100 rewrite skill this repository started as became the **rewrite** job and the `agent` reader. STE was written for people first: aircraft technicians reading English as a second language. This skill keeps that use. A human reader gets the softer mode. A machine reader gets the full one.
