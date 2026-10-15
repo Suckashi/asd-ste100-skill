@@ -1,6 +1,6 @@
 # Clarify — one skill for "explain this" and "rewrite this so it cannot be misread"
 
-A Claude Code skill with one command, `/clarify`, that replaces two families of skills. The first family is the explainers: `eli5`, `show-me`, `explain-to-my-boss`, caveman, walkthrough, and their many variants. The second is the [ASD-STE100 Simplified Technical English](https://www.asd-ste100.org/) rewrite skill this repository started as. It turns dense, ambiguous English into text an AI agent can parse without a human to resolve ambiguity.
+A Claude Code skill with one command, `/clarify`, that replaces two families of skills. The first family is the explainers: `eli5`, `show-me`, `explain-to-my-boss`, caveman, walkthrough, and their many variants. The second is the [ASD-STE100 Simplified Technical English](https://www.asd-ste100.org/) rewrite skill this repository started as. It turns dense, ambiguous English or Chinese into text that a person or a machine cannot misread. STE was written for people first, aircraft technicians reading English as a second language. The full rule set goes to a machine reader, the softer "80%" mode goes to a human reader.
 
 All of them do one thing: take something and make it clear to one specific reader. So the skill picks the reader first, then the job, then the shape and the depth. Each choice has a default and a one-word override.
 
@@ -17,7 +17,7 @@ The shape of the skill follows a note Andrej Karpathy posted on 2 October 2026 (
 | `terse` | Someone who wants the fewest words (the caveman voice) | Answer, reason, next step. Articles dropped, negations and numbers kept. |
 | `agent` | A model, a tool, a pipeline, or a non-native reader, with no human to ask (the default for text a program will parse) | The full ASD-STE100 Strict rule set |
 
-**Explain** is the job when the user wants to understand something: a question, a topic, code, an error, a diff. **Rewrite** is the job when the user hands over text and wants the same content in a clearer form. The skill infers the job from the input. "eli5 this error" is explain. "Rewrite this error so an agent cannot misread it" is rewrite.
+**Explain** is the job when the user wants to understand something: a question, a topic, code, an error, a diff. **Rewrite** is the job when the user hands over text and wants the same content in a clearer form, for a person or for a machine, in English or in Chinese. The skill infers the job from the input. "eli5 this error" is explain. "Rewrite this error so an agent cannot misread it" is rewrite.
 
 ## Explain
 
@@ -26,6 +26,8 @@ The shape is the smallest view that makes the key point clear. The options are p
 `references/sources.md` lists every variant the explain job absorbed, what each does well, and what was taken. It ends with a table of where the variants disagree and what this skill decided. `examples/explain-examples.md` shows one idea at four readers, one show-me answer, and one change explanation.
 
 ## Rewrite: why STE, and why for agents
+
+STE serves two readers here. A person who finds a paragraph dense gets the Flavored mode: the sentence discipline in full, the fixed vocabulary dropped, terms defined for a newcomer. A machine that must parse the text gets Strict. Chinese text gets the same structural rules mapped to Chinese in [`references/chinese.md`](references/chinese.md): actor as subject, one instruction per sentence, no dropped subjects, hedges such as 可能 kept, 進行 plus noun turned back into the verb. Traditional Chinese in, Traditional Chinese out, with Taiwan terms.
 
 ASD-STE100 exists because a misread instruction on an aircraft can kill people. The intended readers were often not native English speakers, with no author to call for clarification. The standard's fix: one meaning per word, active voice, simple tenses, one instruction per sentence, short sentences, no dropped words.
 
@@ -118,6 +120,7 @@ It asks once, never twice. Picks stick for the session. Say "menu" to choose aga
 /clarify agent <paste an error message>        same: agent reader implies rewrite in Strict mode
 /clarify new rewrite <paste a README section>  STE Flavored, terms defined for a newcomer
 /clarify table rewrite <paste text>            the before/after rule table instead of the text
+/clarify rewrite <貼一段中文>                   中文照同一套句子紀律改寫，繁體進繁體出
 ```
 
 Or just say it. For explain: "eli5 this error", "show me what happens when I submit the form", "explain this PR to my manager", "walk me through the checkout flow". For rewrite: "disambiguate this tool description", "apply STE100 to this", "rewrite this so an agent can't misread it".

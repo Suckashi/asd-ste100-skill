@@ -1,6 +1,6 @@
 ---
 name: clarify
-description: "Make any text or idea clear for one chosen reader. Explain a topic, code, error, diff, or decision for a kid, a newcomer, a peer, a boss, or someone who wants the fewest words. Shapes: prose, pseudocode, a tree, a Mermaid diagram, a diff, code, or one HTML page. Or rewrite English that a machine or another agent must parse without a human into ASD-STE100 Simplified Technical English. That covers tool descriptions, error messages, inter-agent instructions, and system prompts. Replaces the eli5, show-me, caveman, walkthrough, and STE100 skills. Triggers: explain, eli5, explain like I'm 5, explain this to my <someone>, dumb it down. Also: show me, draw it, diagram this, walk me through, how does X work, tldr, be brief, caveman mode. Also: disambiguate, STE100, Simplified Technical English, plain-language rewrite, rewrite so an agent cannot misread this. Partial matches count. Asks only when the request is unclear. Not for creative or marketing copy."
+description: "Make any text or idea clear for one chosen reader. Explain a topic, code, error, diff, or decision for a kid, a newcomer, a peer, a boss, or someone who wants the fewest words. Shapes: prose, pseudocode, a tree, a Mermaid diagram, a diff, code, or one HTML page. Or rewrite dense English or Chinese so a person or a machine cannot misread it. English gets ASD-STE100 Simplified Technical English, Chinese gets the same discipline. Full STE for an agent reader (tool descriptions, error messages, system prompts), the 80% version for a person. Triggers: explain, eli5, explain like I'm 5, explain this to my <someone>, dumb it down. Also: show me, draw it, diagram this, walk me through, how does X work, tldr, be brief, caveman mode. Also: disambiguate, STE100, Simplified Technical English, plain-language rewrite, rewrite so an agent cannot misread this, 改寫, 簡化這段, 消除歧義. Partial matches count. Asks only when the request is unclear. Not for creative or marketing copy."
 version: 1.0.0
 ---
 
@@ -8,7 +8,7 @@ version: 1.0.0
 
 Every eli5, show-me, explain-to-my-boss, caveman, walkthrough, and plain-language rewrite skill does one thing. It takes something and makes it clear to one specific reader. The skills differ on four choices only. Who the reader is. Whether the input is a question to answer or a text to transform. What shape the answer takes. How deep it goes. This skill names those four choices, gives each a default, and lets the user set any of them with one word.
 
-It absorbs two families. The explain family (eli5, show-me, caveman, walkthrough, and their variants, listed in `references/sources.md`) became the **explain** job. The ASD-STE100 rewrite skill this repository started as became the **rewrite** job and the `agent` reader.
+It absorbs two families. The explain family (eli5, show-me, caveman, walkthrough, and their variants, listed in `references/sources.md`) became the **explain** job. The ASD-STE100 rewrite skill this repository started as became the **rewrite** job and the `agent` reader. STE was written for people first: aircraft technicians reading English as a second language. This skill keeps that use. A human reader gets the softer mode. A machine reader gets the full one.
 
 ## Invocation
 
@@ -169,6 +169,10 @@ The rewrite job applies ASD-STE100, the controlled-language standard the aerospa
 
 The split between structural and lexical rules is the split between what this skill can verify and what needs ASD's dictionary. STE's ~900-word approved dictionary is free to obtain but not free to redistribute. Issue 9, page 2, grants reproduction rights to eight listed categories of organisation. This project is in none of them. So this skill applies the dictionary's *principle*, the plainest word used the same way every time, and never claims dictionary compliance. For certified STE documentation, request the standard from the [official downloads page](https://www.asd-ste100.org/STE_downloads.html) and check word by word.
 
+### Chinese text
+
+The rewrite job also takes Chinese. STE has no Chinese edition, so apply the structural rules as mapped in `references/chinese.md`. Read that file before you rewrite Chinese. The short version. The actor is the subject (avoid 被, 由). One instruction per sentence (no 並且, 然後 chains). 30 characters for an instruction, 40 for a description. No 「；」. Every sentence keeps its subject. At most two 的 in a chain. A numbered list for three or more steps. The lexical rules become two habits. One word for one action in this document (pick one of 確認, 檢查, 驗證). The verb, not 進行 or 加以 plus a noun. Keep every hedge: 可能, 也許, 應該, 約 stay. 應該 means obligation or inference. Resolve it to 必須 or 可能 only when the context makes the reading certain. Otherwise keep it and flag it. Output in the same script as the input, with Taiwan terms for Traditional Chinese. The linter does not check Chinese. The rule table, when asked, uses the headings 違反的規則, 原文, 改寫.
+
 ### Structural rules, apply with confidence
 
 | Rule | Do | Don't |
@@ -225,7 +229,7 @@ Six mechanical habits cover most of what makes machine-written English hard to p
 - **One idea per sentence.** Short sentences. Plain verbs. Active voice. No semicolons. The shortest text that makes the idea unambiguous, and not one sentence shorter. Cutting words is not the goal. Removing ambiguity is.
 - **Clarity override.** Security warnings, confirmations of irreversible actions, and ordered safety procedures always get plain, full sentences, whatever the reader. A safety instruction opens with the command or the condition, never mid-sentence. For an irreversible action, the warning comes before the command that performs it, not after.
 - **Code artifacts stay normal.** Code blocks, commit messages, PR descriptions, and file contents keep their normal form. The reader setting applies to explanation and commentary only.
-- **Language.** Explain answers in the user's language. Rewrite works on English text, because STE is a standard for English. Keep code, identifiers, and quoted errors as they are in both jobs.
+- **Language.** Explain answers in the user's language. Rewrite takes English and Chinese: English gets the STE rules, Chinese gets the same discipline mapped in `references/chinese.md`. Traditional Chinese in, Traditional Chinese out, with Taiwan terms (資料, 程式, 軟體, 伺服器). Keep code, identifiers, and quoted errors as they are in both jobs.
 
 ## Output
 
@@ -272,6 +276,7 @@ Follow the table with a one-line note on anything you deliberately did not simpl
 - `references/audiences.md`: named readers (ages, roles, relationships) mapped to the six readers, with tone notes.
 - `references/forms.md`: a template and a worked example for each visual form, the Mermaid diagram-type table, and the HTML page checklist.
 - `references/writing-rules.md`: the 9 STE rule sections and dictionary structure, with citations to the official standard.
+- `references/chinese.md`: the STE structural rules mapped to Chinese, the Chinese-specific ambiguity checklist, and the Chinese output format. Read before any Chinese rewrite.
 - `examples/explain-examples.md`: one idea at four readers, one show-me answer, one change explanation.
 - `examples/before-after.md`: STE rewrites, including official rule illustrations and agent-output examples.
 - `scripts/ste-lint.py`: deterministic, stdlib-only linter for the structural rules. Exit 1 when hard violations exceed `--baseline` (default 0). Advisory findings (passive voice, compound tenses) never fail the run. `--selftest` asserts that "may have failed" passes clean.
