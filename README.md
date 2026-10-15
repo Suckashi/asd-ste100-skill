@@ -58,7 +58,7 @@ It does not compare an original text with a rewrite, verify that requirement str
 
 The dangling-conjunction rule checks list markers at the start of a line with zero to three leading spaces. It supports `-`, `*`, `+`, and numeric markers ending in `.` or `)`. It does not parse list syntax inside blockquotes, lazy continuation, or full nested-list semantics. A stripped line beginning with three backticks or three tildes toggles fence detection. `examples/linter-edge-cases.md` is an intentionally invalid fixture: run `python scripts/ste-lint.py examples/linter-edge-cases.md` to confirm the two expected findings.
 
-The skill's own `SKILL.md` does not lint clean, because its rule tables quote the patterns they forbid. Lint it with `python scripts/ste-lint.py --baseline 19 SKILL.md` and read the findings as examples, not defects.
+The skill's own `SKILL.md` does not lint clean, because its rule tables quote the patterns they forbid. Lint it with `python scripts/ste-lint.py --baseline 15 SKILL.md` and read the findings as examples, not defects.
 
 ## Installation
 
