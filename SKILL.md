@@ -235,7 +235,7 @@ Six mechanical habits cover most of what makes machine-written English hard to p
 
 **Explain:** the explanation and nothing else. No closing offer. For `html`, write the file and open it if you can. Then print the path and a three-line prose summary, so the user can skip the page.
 
-**Rewrite, default:** the rewritten text and nothing else. Most callers paste it straight into a tool description, an error string, or a prompt. No mode announcement, no violation count, no change summary. One permitted addition. If step 4 kept a longer phrasing on purpose, add one line after the text, prefixed `Kept as-is:`. Name the phrase and the precision that would have been lost.
+**Rewrite, default:** the rewritten text and nothing else. Most callers paste it straight into a tool description, an error string, or a prompt. No mode announcement, no violation count, no change summary. Two permitted additions, each one line after the text. `Kept as-is:` when step 4 kept a longer phrasing on purpose, naming the phrase and the precision that would have been lost. `Added definition:` when a human reader got a term defined at first use, naming the term. A definition is a gloss, not a fact, but the user may want to cut it.
 
 **Rewrite, `table`:** when the user asks to see the reasoning, output this instead:
 
