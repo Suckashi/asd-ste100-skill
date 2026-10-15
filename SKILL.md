@@ -11,7 +11,7 @@ version: 1.0.0
 These hold in every answer. Read them even if you read nothing else below.
 
 1. Output only the answer. No "Here is", no "Reading is done", no restating the question, no labels such as "Analogy:" or "Takeaway:", no closing offer. `Kept as-is:` and `Added definition:` lines exist only after a rewrite.
-2. The reader sets the length, and the length is a cap. `kid` under 80 words. `new` under 250. `boss` under 120, decision or impact in the first sentence. `terse` the minimum. Count before you send. Over the cap, cut whole parts, not words. Tables and bold section labels are not allowed in an explanation under 250 words.
+2. The reader sets the length, and the length is a cap. `kid` under 80 words. `new` under 250. `boss` under 120, decision or impact in the first sentence. `terse` the minimum. In Chinese, count characters: `kid` 150, `new` 450, `boss` 220. Count before you send. Over the cap, cut whole parts, not words. Tables and bold section labels are not allowed in an explanation under 250 words.
 3. Keep every hedge, number, name, identifier, and error string from the source. Never add a fact, a cause, or a frequency the source did not state. Keep the source's own name for every actor.
 4. Every analogy says where it breaks.
 5. A visual answer (tree, diagram, diff, code) is two or three lines of text, the visual, and one line that says what to notice. Nothing else.
@@ -98,10 +98,10 @@ Decide who reads the answer before you write a word. The reader sets vocabulary,
 
 | Reader | Assume | Vocabulary | Analogies | Length |
 |---|---|---|---|---|
-| `kid` | No background and a short attention span | Everyday words only. No jargon at all. | One, carried through the whole answer | 3 to 6 sentences, under 80 words |
-| `new` | No background in this topic, full adult intelligence | Plain words. Define each technical term at first use. | One, when the idea is not obvious | Under 250 words. One screen. |
+| `kid` | No background and a short attention span | Everyday words only. No jargon at all. | One, carried through the whole answer | 3 to 6 sentences, under 80 words (150 Chinese characters) |
+| `new` | No background in this topic, full adult intelligence | Plain words. Define each technical term at first use. | One, when the idea is not obvious | Under 250 words (450 Chinese characters). One screen. |
 | `peer` | Works in this field | Exact terms. Trade-offs and edge cases matter. | None, unless asked | As long as the question needs |
-| `boss` | Decides and pays, does not build | Impact, risk, cost, options. Numbers where they exist. | Only if it shortens the answer | Under 120 words. The first sentence is the decision or the impact. No feature lists. |
+| `boss` | Decides and pays, does not build | Impact, risk, cost, options. Numbers where they exist. | Only if it shortens the answer | Under 120 words (220 Chinese characters). The first sentence is the decision or the impact. No feature lists. |
 | `terse` | An expert who wants the fewest words (the caveman voice) | Short words, standard acronyms, no invented abbreviations. Articles may go. | None | Minimum. Answer, reason, next step. |
 | `agent` | A model, a tool, a translation pipeline, or a non-native reader, with no human to ask | The plainest word, used the same way every time | None | As long as it takes to be unambiguous, and not one word longer |
 
@@ -267,7 +267,7 @@ Follow the table with a one-line note on anything you deliberately did not simpl
 Check these five things on the draft. Fix what fails, then send.
 
 1. Nothing before the answer and nothing after it, except the permitted `Kept as-is:` and `Added definition:` lines (「保留原文：」 and 「補充定義：」 in Chinese). No labels on the parts. No advice paragraph after a rewrite. No closing offer.
-2. Count the words (characters for Chinese). `kid` under 80. `new` under 250. `boss` under 120, decision or impact in the first sentence. `terse` the minimum. Over the cap: cut the least important part whole. Do not trim every sentence a little. If the cap is wrong for this question, go over it and say so in one line.
+2. Count the words, or the characters for Chinese. `kid` under 80 words or 150 characters. `new` under 250 or 450. `boss` under 120 or 220, decision or impact in the first sentence. `terse` the minimum. Over the cap: cut the least important part whole. Do not trim every sentence a little. If the cap is wrong for this question, go over it and say so in one line.
 3. Every hedge in the source is still in the output. Every number, name, identifier, and error string is unchanged. Every actor keeps the name the source gave it.
 4. Every analogy says where it breaks.
 5. For a Chinese rewrite: you read `references/chinese.md` this turn. If not, read it now and check the draft against it.
