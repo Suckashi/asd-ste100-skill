@@ -171,7 +171,7 @@ The split between structural and lexical rules is the split between what this sk
 
 ### Chinese text
 
-The rewrite job also takes Chinese. STE has no Chinese edition, so apply the structural rules as mapped in `references/chinese.md`. Read that file before you rewrite Chinese. The short version. The actor is the subject (avoid 被, 由). One instruction per sentence (no 並且, 然後 chains). 30 characters for an instruction, 40 for a description. No 「；」. Every sentence keeps its subject. At most two 的 in a chain. A numbered list for three or more steps. The lexical rules become two habits. One word for one action in this document (pick one of 確認, 檢查, 驗證). The verb, not 進行 or 加以 plus a noun. Keep every hedge: 可能, 也許, 應該, 約 stay. 應該 means obligation or inference. Resolve it to 必須 or 可能 only when the context makes the reading certain. Otherwise keep it and flag it. Output in the same script as the input, with Taiwan terms for Traditional Chinese. The linter does not check Chinese. The rule table, when asked, uses the headings 違反的規則, 原文, 改寫.
+The rewrite job also takes Chinese. STE has no Chinese edition, so apply the structural rules as mapped in `references/chinese.md`. Read that file with the Read tool before you write a word of a Chinese rewrite. The short version below is not enough on its own. The short version. The actor is the subject (avoid 被, 由). One instruction per sentence (no 並且, 然後 chains). 30 characters for an instruction, 40 for a description. No 「；」. Every sentence keeps its subject. At most two 的 in a chain. A numbered list for three or more steps. The lexical rules become two habits. One word for one action in this document (pick one of 確認, 檢查, 驗證). The verb, not 進行 or 加以 plus a noun. Keep every hedge: 可能, 也許, 應該, 約 stay. 應該 means obligation or inference. Resolve it to 必須 or 可能 only when the context makes the reading certain. Otherwise keep it and flag it. Output in the same script as the input, with Taiwan terms for Traditional Chinese. The output labels are Chinese too: `Kept as-is:` is 「保留原文：」, `Added definition:` is 「補充定義：」, and the rule table uses the headings 違反的規則, 原文, 改寫. The linter does not check Chinese.
 
 ### Structural rules, apply with confidence
 
@@ -223,7 +223,7 @@ Six mechanical habits cover most of what makes machine-written English hard to p
 ## Rules that hold in every job
 
 - **Read the real thing first.** For code, read the source before you explain it. For an error, quote it exactly. For a change, read the diff and the code around it. Never explain a system from its filenames.
-- **Simplify the telling, not the claims.** Keep every hedge the source has. Keep numbers, identifiers, error strings, and versions exact. Never add a fact, a cause, a frequency, or a mechanism the source did not state. A text that reads better because it supplies one has stopped being a rewrite, and an explanation that supplies one is wrong.
+- **Simplify the telling, not the claims.** Keep every hedge the source has. Keep numbers, identifiers, error strings, and versions exact. Keep the source's own name for every actor and thing: if the source says 系統, the rewrite says 系統, not 工具, even when the user called it a tool. Never add a fact, a cause, a frequency, or a mechanism the source did not state. A text that reads better because it supplies one has stopped being a rewrite, and an explanation that supplies one is wrong.
 - **Define or avoid.** Define each technical term at first use, or do not use it. Never use a label that you invented earlier in this session as if the reader knew it.
 - **Lead with the answer.** No preamble, no "great question", no "let me explain". No announcement of which skill, reader, job, or mode is in use.
 - **One idea per sentence.** Short sentences. Plain verbs. Active voice. No semicolons. The shortest text that makes the idea unambiguous, and not one sentence shorter. Cutting words is not the goal. Removing ambiguity is.
@@ -249,6 +249,16 @@ Mode: Strict. 7 violations found.
 ```
 
 Follow the table with a one-line note on anything you deliberately did not simplify, and why.
+
+## Before you send
+
+Check these five things on the draft. Fix what fails, then send.
+
+1. Nothing before the answer and nothing after it, except the permitted `Kept as-is:` and `Added definition:` lines (「保留原文：」 and 「補充定義：」 in Chinese). No labels on the parts. No advice paragraph after a rewrite. No closing offer.
+2. Count the words (characters for Chinese). `kid` under 80. `new` under 250. `boss` under 120, decision or impact in the first sentence. `terse` the minimum. Over the cap: cut the least important part whole. Do not trim every sentence a little. If the cap is wrong for this question, go over it and say so in one line.
+3. Every hedge in the source is still in the output. Every number, name, identifier, and error string is unchanged. Every actor keeps the name the source gave it.
+4. Every analogy says where it breaks.
+5. For a Chinese rewrite: you read `references/chinese.md` this turn. If not, read it now and check the draft against it.
 
 ## Boundaries
 
