@@ -90,3 +90,22 @@ Flavored mode kept the explanatory rhythm and did not force one fixed term per c
 ## How to Read These Examples
 
 Part 1 shows the actual rules this skill is built on. Part 2 shows the transfer: the same discipline — one meaning per word, active voice, simple tense, one instruction per sentence, explicit conditions instead of buried subordinate clauses — makes machine-to-machine and cross-language text safer to parse, not just aircraft manuals.
+
+## Part 3 — 中文範例
+
+規則對應見 `references/chinese.md`。這是給 `agent` 讀者的 Strict 改寫。
+
+**改前：**
+> 本工具會嘗試將已授權的各個整合來源的使用者近期活動資料進行同步，若其中有尚未完成同步的，可能會回傳部分結果，呼叫端應該要妥善處理。
+
+**問題：**
+- 一句 60 字，包含三件事（同步、部分結果、呼叫端責任）。
+- 「的」連用三個：已授權的、各個整合來源的、使用者近期活動資料。
+- 「進行同步」是動詞名詞化。
+- 「應該要」在這裡是義務還是推測？從上下文看是義務。
+- 「妥善處理」看不出要做什麼，但原文沒說，不能補。
+
+**改後：**
+> 本工具會嘗試同步使用者的近期活動資料。資料來源是所有已授權的整合服務。若其中一個來源尚未完成同步，本工具可能只回傳部分結果。呼叫端必須處理部分結果。
+
+保留原文：「處理部分結果」。原文沒有說明怎麼處理，改寫不能補上。「嘗試」和「可能」兩個語氣詞原樣保留。
